@@ -11,3 +11,4 @@ and mostly have comprehensive tests.
 * mathutil provides some missing mathematical functions
 * strdist provides some string distance functions which are used to suggest alternative parameters in error messages
 * testhelper offers some functions commonly used when testing
+* xdg supports the XDG Base Directory Specification
