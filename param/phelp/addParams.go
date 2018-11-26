@@ -1,9 +1,9 @@
 package phelp
 
 import (
-	"github.com/NickWells/golem/param"
-	"github.com/NickWells/golem/param/paction"
-	"github.com/NickWells/golem/param/psetter"
+	"github.com/nickwells/golem/param"
+	"github.com/nickwells/golem/param/paction"
+	"github.com/nickwells/golem/param/psetter"
 )
 
 const (

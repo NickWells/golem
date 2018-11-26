@@ -1,7 +1,7 @@
 package filecheck_test
 
 import (
-	"github.com/NickWells/golem/filecheck"
+	"github.com/nickwells/golem/filecheck"
 	"os"
 	"path"
 	"regexp"

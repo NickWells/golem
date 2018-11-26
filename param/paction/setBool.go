@@ -1,8 +1,8 @@
 package paction
 
 import (
-	"github.com/NickWells/golem/location"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/location"
+	"github.com/nickwells/golem/param"
 )
 
 // SetBool returns an ActionFunc to set the val to the given bool.

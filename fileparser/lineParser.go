@@ -1,7 +1,7 @@
 package fileparser
 
 import (
-	"github.com/NickWells/golem/location"
+	"github.com/nickwells/golem/location"
 	"io"
 	"os"
 )

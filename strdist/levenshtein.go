@@ -1,7 +1,7 @@
 package strdist
 
 import (
-	"github.com/NickWells/golem/mathutil"
+	"github.com/nickwells/golem/mathutil"
 	"unicode/utf8"
 )
 

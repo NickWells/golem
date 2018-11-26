@@ -2,9 +2,9 @@ package param_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/param"
-	"github.com/NickWells/golem/param/paramset"
-	"github.com/NickWells/golem/testhelper"
+	"github.com/nickwells/golem/param"
+	"github.com/nickwells/golem/param/paramset"
+	"github.com/nickwells/golem/testhelper"
 	"testing"
 )
 

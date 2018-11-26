@@ -3,10 +3,10 @@ package psetter
 import (
 	"errors"
 	"fmt"
-	"github.com/NickWells/golem/check"
-	"github.com/NickWells/golem/filecheck"
-	"github.com/NickWells/golem/fileparser"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/check"
+	"github.com/nickwells/golem/filecheck"
+	"github.com/nickwells/golem/fileparser"
+	"github.com/nickwells/golem/param"
 )
 
 // PathnameSetter allows you to specify a parameter that can be used to set an

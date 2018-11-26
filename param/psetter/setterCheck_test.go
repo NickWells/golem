@@ -2,9 +2,9 @@ package psetter_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/param"
-	"github.com/NickWells/golem/param/psetter"
-	"github.com/NickWells/golem/testhelper"
+	"github.com/nickwells/golem/param"
+	"github.com/nickwells/golem/param/psetter"
+	"github.com/nickwells/golem/testhelper"
 	"regexp"
 	"testing"
 	"time"

@@ -3,8 +3,8 @@ package param
 import (
 	"errors"
 	"fmt"
-	"github.com/NickWells/golem/location"
-	"github.com/NickWells/golem/strdist"
+	"github.com/nickwells/golem/location"
+	"github.com/nickwells/golem/strdist"
 	"strings"
 )
 

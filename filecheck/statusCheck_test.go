@@ -2,12 +2,16 @@ package filecheck_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/check"
-	"github.com/NickWells/golem/filecheck"
+	"os"
 	"testing"
+
+	"github.com/nickwells/golem/check"
+	"github.com/nickwells/golem/filecheck"
 )
 
 func TestStatusCheck(t *testing.T) {
+	os.Chmod("testdata/IsAFile.PBits0600", 0600) // force the file mode
+
 	testCases := []struct {
 		testName    string
 		name        string

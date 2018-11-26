@@ -2,8 +2,8 @@ package paction
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/location"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/location"
+	"github.com/nickwells/golem/param"
 	"os"
 )
 

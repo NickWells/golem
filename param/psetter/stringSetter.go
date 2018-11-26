@@ -2,8 +2,8 @@ package psetter
 
 import (
 	"errors"
-	"github.com/NickWells/golem/check"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/check"
+	"github.com/nickwells/golem/param"
 )
 
 // StringSetter is the type for setting string values from

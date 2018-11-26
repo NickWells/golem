@@ -3,7 +3,7 @@ package param
 import (
 	"errors"
 	"fmt"
-	"github.com/NickWells/golem/location"
+	"github.com/nickwells/golem/location"
 	"io"
 	"os"
 	"sort"

@@ -3,8 +3,8 @@ package psetter
 import (
 	"errors"
 	"fmt"
-	"github.com/NickWells/golem/check"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/check"
+	"github.com/nickwells/golem/param"
 	"strconv"
 )
 

@@ -2,8 +2,8 @@ package strdist_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/mathutil"
-	"github.com/NickWells/golem/strdist"
+	"github.com/nickwells/golem/mathutil"
+	"github.com/nickwells/golem/strdist"
 	"testing"
 )
 

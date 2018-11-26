@@ -2,7 +2,7 @@ package param_test
 
 import (
 	"errors"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/param"
 	"strings"
 	"testing"
 )

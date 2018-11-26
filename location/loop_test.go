@@ -2,7 +2,7 @@ package location_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/location"
+	"github.com/nickwells/golem/location"
 	"testing"
 )
 

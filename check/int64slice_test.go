@@ -2,8 +2,8 @@ package check_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/check"
-	"github.com/NickWells/golem/testhelper"
+	"github.com/nickwells/golem/check"
+	"github.com/nickwells/golem/testhelper"
 	"strings"
 	"testing"
 )

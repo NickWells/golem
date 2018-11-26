@@ -3,7 +3,7 @@ package filecheck
 import (
 	"errors"
 	"fmt"
-	"github.com/NickWells/golem/check"
+	"github.com/nickwells/golem/check"
 	"os"
 )
 

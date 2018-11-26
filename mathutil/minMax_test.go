@@ -2,7 +2,7 @@ package mathutil_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/mathutil"
+	"github.com/nickwells/golem/mathutil"
 	"testing"
 )
 

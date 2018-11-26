@@ -1,8 +1,8 @@
 package paramset
 
 import (
-	"github.com/NickWells/golem/param"
-	"github.com/NickWells/golem/param/phelp"
+	"github.com/nickwells/golem/param"
+	"github.com/nickwells/golem/param/phelp"
 )
 
 type noHelpNoExit struct{}

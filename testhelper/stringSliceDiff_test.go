@@ -1,7 +1,7 @@
 package testhelper_test
 
 import (
-	"github.com/NickWells/golem/testhelper"
+	"github.com/nickwells/golem/testhelper"
 	"testing"
 )
 

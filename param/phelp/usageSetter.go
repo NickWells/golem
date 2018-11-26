@@ -1,7 +1,7 @@
 package phelp
 
 import (
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/param"
 )
 
 // helpType records the helper to be updated and the style to apply if this

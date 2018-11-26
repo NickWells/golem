@@ -1,6 +1,6 @@
 package phelp
 
-import "github.com/NickWells/golem/param/paction"
+import "github.com/nickwells/golem/param/paction"
 
 // helpStyle records the style of help message to generate - it can be
 // standard, full or short

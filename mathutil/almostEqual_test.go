@@ -1,7 +1,7 @@
 package mathutil_test
 
 import (
-	"github.com/NickWells/golem/mathutil"
+	"github.com/nickwells/golem/mathutil"
 	"math"
 	"testing"
 )

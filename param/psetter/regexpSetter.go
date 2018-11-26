@@ -3,7 +3,7 @@ package psetter
 import (
 	"errors"
 	"fmt"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/param"
 	"regexp"
 )
 

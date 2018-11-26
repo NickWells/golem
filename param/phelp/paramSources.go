@@ -2,7 +2,7 @@ package phelp
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/param"
 )
 
 // showParamSources will print a usage message showing the alternative

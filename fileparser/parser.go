@@ -3,7 +3,7 @@ package fileparser
 import (
 	"bufio"
 	"fmt"
-	"github.com/NickWells/golem/location"
+	"github.com/nickwells/golem/location"
 	"os"
 	"path/filepath"
 	"strings"

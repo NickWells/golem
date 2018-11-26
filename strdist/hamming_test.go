@@ -1,7 +1,7 @@
 package strdist_test
 
 import (
-	"github.com/NickWells/golem/strdist"
+	"github.com/nickwells/golem/strdist"
 	"testing"
 )
 

@@ -2,7 +2,7 @@ package param
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/location"
+	"github.com/nickwells/golem/location"
 	"io"
 	"strings"
 )

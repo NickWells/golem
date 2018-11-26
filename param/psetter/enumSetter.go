@@ -3,7 +3,7 @@ package psetter
 import (
 	"errors"
 	"fmt"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/param"
 )
 
 // EnumSetter allows you to specify a parameter that will only allow an

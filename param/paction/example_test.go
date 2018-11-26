@@ -2,10 +2,10 @@ package paction_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/param"
-	"github.com/NickWells/golem/param/paction"
-	"github.com/NickWells/golem/param/paramset"
-	"github.com/NickWells/golem/param/psetter"
+	"github.com/nickwells/golem/param"
+	"github.com/nickwells/golem/param/paction"
+	"github.com/nickwells/golem/param/paramset"
+	"github.com/nickwells/golem/param/psetter"
 )
 
 // Example_count provides an example of how the paction.Counter might be

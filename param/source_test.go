@@ -1,10 +1,10 @@
 package param_test
 
 import (
-	"github.com/NickWells/golem/location"
-	"github.com/NickWells/golem/param"
-	"github.com/NickWells/golem/param/paramset"
-	"github.com/NickWells/golem/param/psetter"
+	"github.com/nickwells/golem/location"
+	"github.com/nickwells/golem/param"
+	"github.com/nickwells/golem/param/paramset"
+	"github.com/nickwells/golem/param/psetter"
 	"testing"
 )
 

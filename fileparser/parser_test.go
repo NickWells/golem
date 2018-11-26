@@ -3,8 +3,8 @@ package fileparser_test
 import (
 	"bufio"
 	"bytes"
-	"github.com/NickWells/golem/fileparser"
-	"github.com/NickWells/golem/location"
+	"github.com/nickwells/golem/fileparser"
+	"github.com/nickwells/golem/location"
 	"testing"
 )
 

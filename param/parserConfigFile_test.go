@@ -2,10 +2,10 @@ package param_test
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/filecheck"
-	"github.com/NickWells/golem/param"
-	"github.com/NickWells/golem/param/paramset"
-	"github.com/NickWells/golem/param/psetter"
+	"github.com/nickwells/golem/filecheck"
+	"github.com/nickwells/golem/param"
+	"github.com/nickwells/golem/param/paramset"
+	"github.com/nickwells/golem/param/psetter"
 	"testing"
 )
 

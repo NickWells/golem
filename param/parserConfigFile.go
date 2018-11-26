@@ -2,9 +2,9 @@ package param
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/filecheck"
-	"github.com/NickWells/golem/fileparser"
-	"github.com/NickWells/golem/location"
+	"github.com/nickwells/golem/filecheck"
+	"github.com/nickwells/golem/fileparser"
+	"github.com/nickwells/golem/location"
 	"os"
 	"strings"
 )

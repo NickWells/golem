@@ -1,7 +1,7 @@
 package psetter_test
 
 import (
-	"github.com/NickWells/golem/param/psetter"
+	"github.com/nickwells/golem/param/psetter"
 	"testing"
 )
 

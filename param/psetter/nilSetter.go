@@ -2,7 +2,7 @@ package psetter
 
 import (
 	"errors"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/param"
 )
 
 // NilSetter is used if no value is to be set. It can be useful if the only

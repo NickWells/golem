@@ -2,7 +2,7 @@ package psetter
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/param"
 	"strconv"
 )
 

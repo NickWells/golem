@@ -2,7 +2,7 @@ package phelp
 
 import (
 	"fmt"
-	"github.com/NickWells/golem/param"
+	"github.com/nickwells/golem/param"
 	"io"
 	"os"
 )

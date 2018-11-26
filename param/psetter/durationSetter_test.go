@@ -1,8 +1,8 @@
 package psetter_test
 
 import (
-	"github.com/NickWells/golem/check"
-	"github.com/NickWells/golem/param/psetter"
+	"github.com/nickwells/golem/check"
+	"github.com/nickwells/golem/param/psetter"
 	"testing"
 	"time"
 )
