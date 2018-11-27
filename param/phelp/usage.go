@@ -2,9 +2,10 @@ package phelp
 
 import (
 	"fmt"
-	"github.com/nickwells/golem/param"
 	"io"
 	"os"
+
+	"github.com/nickwells/golem/param"
 )
 
 const stdIndent = "    "
@@ -39,20 +40,37 @@ func badGroups(ps *param.ParamSet, groups map[string]bool, name string) bool {
 	return badGroups > 0
 }
 
+// printOptValNote prints an explanation of how optional values must be set
+func (h StdHelp) printOptValNote(w io.Writer) {
+	fmt.Fprint(w, "\n"+equals+"\n\n")
+
+	pfx := "Note: "
+	formatPrefixedText(w, pfx,
+		"Optional values (those with a parameter name followed by [=...])"+
+			" must be given with the parameter,"+
+			" after an '=' rather than as a following argument."+
+			" For instance,",
+		0)
+	formatText(w, "\n-xxx=...\nrather than\n-xxx ...",
+		len(pfx), len(pfx))
+}
+
 // Help prints the messages and then a standardised usage message based on
 // the parameters supplied to the param set. It then exits with an exit
 // status of 1
 func (h StdHelp) Help(ps *param.ParamSet, messages ...string) {
+	w := ps.ErrWriter()
 	for _, message := range messages {
-		formatText(ps.ErrWriter(), message, 0, 0)
+		formatText(w, message, 0, 0)
 	}
 	if len(messages) > 0 {
-		fmt.Fprint(ps.ErrWriter(), "\n"+equals+"\n\n")
+		fmt.Fprint(w, "\n"+equals+"\n\n")
 	}
 
 	if h.style != Short &&
 		h.style != GroupNamesOnly {
-		formatText(ps.ErrWriter(), ps.ProgDesc(), textIndent, textIndent)
+		formatText(w, ps.ProgDesc(), textIndent, textIndent)
+		fmt.Fprint(w, "\n")
 	}
 
 	if h.includeGroups {
@@ -68,29 +86,29 @@ func (h StdHelp) Help(ps *param.ParamSet, messages ...string) {
 		}
 	}
 	if h.groupListCounter.Count() > 1 {
-		formatText(ps.ErrWriter(),
-			"Error: only include OR exclude parameter groups"+
-				" not both at the same time."+
-				" Excluded groups will be ignored."+
-				" They have been set at:",
+		formatText(w, "Error: only include OR exclude parameter groups"+
+			" not both at the same time."+
+			" Excluded groups will be ignored."+
+			" They have been set at:",
 			0, textIndent)
-		formatText(ps.ErrWriter(), h.groupListCounter.SetBy(),
-			textIndent, textIndent)
+		formatText(w, h.groupListCounter.SetBy(), textIndent, textIndent)
 		h.excludeGroups = false
 	}
 
-	fmt.Fprint(ps.ErrWriter(), "Usage: ", ps.ProgName())
+	fmt.Fprint(w, "Usage: ", ps.ProgName())
 
 	if h.style == GroupNamesOnly {
-		fmt.Fprintln(ps.ErrWriter(), "\nParameter groups")
-		h.printParamGroups(ps.ErrWriter(), ps)
+		fmt.Fprintln(w, "\nParameter groups")
+		h.printParamGroups(w, ps)
 	} else {
-		h.printPositionalParams(ps.ErrWriter(), ps)
-		h.printParams(ps.ErrWriter(), ps)
+		h.printPositionalParams(w, ps)
+		h.printParams(w, ps)
 	}
 
 	if h.style != Short {
 		h.printAlternativeSources(ps)
+
+		h.printOptValNote(w)
 	}
 
 	os.Exit(1)
@@ -101,7 +119,7 @@ func valueNeededStr(vr param.ValueReq) string {
 		return "=..."
 	}
 	if vr == param.Optional {
-		return "[=...] "
+		return "[=...]"
 	}
 	return ""
 }
@@ -116,8 +134,8 @@ func (h StdHelp) printParamUsage(w io.Writer, p *param.ByName) {
 	prefix := "-"
 	suffix := valueNeededStr(p.ValueReq())
 	if !p.AttrIsSet(param.MustBeSet) {
-		prefix = "[" + prefix
-		suffix += "]"
+		prefix = "[ " + prefix
+		suffix += " ]"
 	}
 
 	paramNames := ""
@@ -134,18 +152,8 @@ func (h StdHelp) printParamUsage(w io.Writer, p *param.ByName) {
 	}
 
 	formatText(w, p.Description(), descriptionIndent, descriptionIndent)
-	avPrefix := "Allowed values: "
 	formatPrefixedText(w,
-		avPrefix, p.AllowedValues(), descriptionIndent)
-	if p.ValueReq() == param.Optional {
-		indent := descriptionIndent + len(avPrefix)
-		formatText(w,
-			"As the value is optional it must be given with the parameter,"+
-				" after an '=' rather than as a following argument."+
-				" For instance,\n-"+p.Name()+"=...\n"+
-				" rather than\n-"+p.Name()+" ...",
-			indent, indent)
-	}
+		"Allowed values: ", p.AllowedValues(), descriptionIndent)
 	formatPrefixedText(w,
 		"Initial value: ", p.InitialValue(), descriptionIndent)
 }

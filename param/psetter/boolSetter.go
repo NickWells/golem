@@ -2,8 +2,9 @@ package psetter
 
 import (
 	"fmt"
-	"github.com/nickwells/golem/param"
 	"strconv"
+
+	"github.com/nickwells/golem/param"
 )
 
 // BoolSetter is used to set boolean flags
@@ -33,7 +34,8 @@ func (s BoolSetter) SetWithVal(_, val string) error {
 
 // AllowedValues returns a description of the allowed values.
 func (s BoolSetter) AllowedValues() string {
-	return "none or some value that can be interpreted as true or false"
+	return "none (which will be taken as 'true')" +
+		" or some value that can be interpreted as true or false"
 }
 
 // CurrentValue returns the current setting of the parameter value

@@ -2,8 +2,9 @@ package psetter
 
 import (
 	"fmt"
-	"github.com/nickwells/golem/param"
 	"strconv"
+
+	"github.com/nickwells/golem/param"
 )
 
 // BoolSetterNot is used to invert the normal meaning of a boolean parameter.
@@ -45,7 +46,8 @@ func (s BoolSetterNot) SetWithVal(_, val string) error {
 
 // AllowedValues returns a description of the allowed values
 func (s BoolSetterNot) AllowedValues() string {
-	return "none or some value that can be interpreted as true or false"
+	return "none (which will be taken as 'true')" +
+		" or some value that can be interpreted as true or false"
 }
 
 // CurrentValue returns the current setting of the parameter value
