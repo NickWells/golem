@@ -2,9 +2,10 @@ package param
 
 import (
 	"fmt"
-	"github.com/nickwells/golem/location"
 	"io"
 	"strings"
+
+	"github.com/nickwells/golem/location"
 )
 
 // =============================================
@@ -252,7 +253,7 @@ func (p *ByName) processParam(source string, loc *location.L, paramParts []strin
 
 	if err != nil {
 		p.ps.errors[p.name] = append(p.ps.errors[p.name],
-			loc.Errorf("error with parameter: %s"+err.Error()))
+			loc.Error("error with parameter: "+err.Error()))
 		return
 	}
 
@@ -263,7 +264,7 @@ func (p *ByName) processParam(source string, loc *location.L, paramParts []strin
 
 		if err != nil {
 			p.ps.errors[p.name] = append(p.ps.errors[p.name],
-				loc.Errorf("error with parameter: %s", err.Error()))
+				loc.Error("error with parameter: "+err.Error()))
 		}
 	}
 }
