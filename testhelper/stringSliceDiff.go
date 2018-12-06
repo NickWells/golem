@@ -1,14 +1,9 @@
 package testhelper
 
+// StringSliceDiff will compare two slices of strings for equality. If they
+// are of different lengths they are taken to be different. A nil slice and
+// an empty slice are taken to be the same.
 func StringSliceDiff(a, b []string) bool {
-	if a == nil && b == nil {
-		return false
-	}
-
-	if a == nil || b == nil {
-		return true
-	}
-
 	if len(a) != len(b) {
 		return true
 	}

@@ -44,16 +44,10 @@ func badPanicString(panicked, panicExpected bool,
 		return true, "a panic was seen but the value was not a string"
 	}
 
-	panicIsBad := false
-	msg := ""
-	sep := "the panic message should contain: "
-
-	for _, s := range expVal {
-		if !strings.Contains(pvStr, s) {
-			panicIsBad = true
-			msg += sep + s
-			sep = "\n\t\t: and: "
-		}
+	missing := missingParts(pvStr, expVal)
+	if len(missing) > 0 {
+		return true, "the panic message should contain: " +
+			strings.Join(missing, "\n\t\t: and: ")
 	}
-	return panicIsBad, msg
+	return false, ""
 }
