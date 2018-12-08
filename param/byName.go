@@ -124,7 +124,7 @@ type OptFunc func(p *ByName) error
 
 // Add will add a new named parameter to the set that will be recognised. The
 // setter defines the function that should be performed when the parameter is
-// processed and will typically be a parameter setter from the paramSetter
+// processed and will typically be a parameter setter from the psetter
 // package that will set the value of an associated variable.
 //
 // Any leading or trailing spaces are silently removed. Add will panic if the
