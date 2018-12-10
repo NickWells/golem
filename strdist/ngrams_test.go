@@ -2,9 +2,10 @@ package strdist_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/nickwells/golem/mathutil"
 	"github.com/nickwells/golem/strdist"
-	"testing"
 )
 
 // TestNGrams tests the NGrams function
@@ -404,75 +405,6 @@ func TestNGramsEqual(t *testing.T) {
 	}
 }
 
-// TestJaccard tests the Jaccard functions
-func TestJaccard(t *testing.T) {
-	testCases := []struct {
-		name           string
-		m1, m2         map[string]int
-		expVal         float64
-		expWeightedVal float64
-	}{
-		{
-			name: "2 in m1 and the same in m2 plus one more",
-			m1: map[string]int{
-				"ab": 1,
-				"bc": 2,
-			},
-			m2: map[string]int{
-				"ab": 1,
-				"bc": 2,
-				"cd": 3,
-			},
-			expVal:         0.666666667,
-			expWeightedVal: 0.33333333,
-		},
-		{
-			name:           "both empty",
-			m1:             map[string]int{},
-			m2:             map[string]int{},
-			expVal:         1.0,
-			expWeightedVal: 1.0,
-		},
-		{
-			name:           "both nil",
-			expVal:         1.0,
-			expWeightedVal: 1.0,
-		},
-	}
-
-	for i, tc := range testCases {
-		testID := fmt.Sprintf("test %d: %s", i, tc.name)
-		ji := strdist.JaccardIndex(tc.m1, tc.m2)
-		if !mathutil.AlmostEqual(ji, tc.expVal, 0.00001) {
-			t.Errorf("%s : the returned index should have been"+
-				" %9.7f but was %9.7f",
-				testID, tc.expVal, ji)
-		}
-
-		ji = strdist.Jaccard(tc.m1, tc.m2)
-		if !mathutil.AlmostEqual(ji, 1.0-tc.expVal, 0.00001) {
-			t.Errorf("%s : the returned index should have been"+
-				" %9.7f but was %9.7f",
-				testID, 1.0-tc.expVal, ji)
-		}
-
-		wji := strdist.WeightedJaccardIndex(tc.m1, tc.m2)
-		if !mathutil.AlmostEqual(wji, tc.expWeightedVal, 0.00001) {
-			t.Errorf("%s (weighted) : the returned index should have been"+
-				" %9.7f but was %9.7f",
-				testID, tc.expWeightedVal, wji)
-		}
-
-		wji = strdist.WeightedJaccard(tc.m1, tc.m2)
-		if !mathutil.AlmostEqual(wji, 1.0-tc.expWeightedVal, 0.00001) {
-			t.Errorf("%s (weighted) : the returned index should have been"+
-				" %9.7f but was %9.7f",
-				testID, 1.0-tc.expWeightedVal, wji)
-		}
-	}
-
-}
-
 // TestOverlapCoefficient tests the OverlapCoefficient functions
 func TestOverlapCoefficient(t *testing.T) {
 	testCases := []struct {
@@ -543,17 +475,116 @@ func TestOverlapCoefficient(t *testing.T) {
 	for i, tc := range testCases {
 		testID := fmt.Sprintf("test %d: %s", i, tc.name)
 		oc := strdist.OverlapCoefficient(tc.m1, tc.m2)
-		if !mathutil.AlmostEqual(oc, tc.expVal, 0.00001) {
+
+		const epsilon = 0.00001
+		if !mathutil.AlmostEqual(oc, tc.expVal, epsilon) {
 			t.Errorf("%s : the returned coefficient should have been"+
-				" %9.7f but was %9.7f",
-				testID, tc.expVal, oc)
+				" within %f of %9.7f but was %9.7f",
+				testID, epsilon, tc.expVal, oc)
 		}
 		woc := strdist.WeightedOverlapCoefficient(tc.m1, tc.m2)
-		if !mathutil.AlmostEqual(woc, tc.expWeightedVal, 0.00001) {
+		if !mathutil.AlmostEqual(woc, tc.expWeightedVal, epsilon) {
 			t.Errorf(
 				"%s (weighted) : the returned coefficient should have been"+
-					" %9.7f but was %9.7f",
-				testID, tc.expWeightedVal, woc)
+					" within %f of %9.7f but was %9.7f",
+				testID, epsilon, tc.expWeightedVal, woc)
+		}
+	}
+}
+
+func TestNGramDot(t *testing.T) {
+	testCases := []struct {
+		name   string
+		s1, s2 string
+		ngLen  int
+		expDot int64
+	}{
+		{
+			name:   "same string",
+			s1:     "abab",
+			s2:     "abab",
+			ngLen:  2,
+			expDot: 5,
+		},
+		{
+			name:   "different strings, no common n-grams",
+			s1:     "abab",
+			s2:     "cdcd",
+			ngLen:  2,
+			expDot: 0,
+		},
+		{
+			name:   "different strings, one common n-gram",
+			s1:     "abab",
+			s2:     "cdcdba",
+			ngLen:  2,
+			expDot: 1,
+		},
+	}
+
+	for i, tc := range testCases {
+		tcID := fmt.Sprintf("test %d: %s :\n", i, tc.name)
+
+		ngS1, err := strdist.NGrams(tc.s1, tc.ngLen)
+		if err != nil {
+			t.Log(tcID)
+			t.Errorf("\t: Couldn't create the ngram set: %s\n", err)
+			continue
+		}
+
+		ngS2, err := strdist.NGrams(tc.s2, tc.ngLen)
+		if err != nil {
+			t.Log(tcID)
+			t.Errorf("\t: Couldn't create the ngram set: %s\n", err)
+			continue
+		}
+
+		dot := strdist.Dot(ngS1, ngS2)
+
+		if dot != tc.expDot {
+			t.Log(tcID)
+			t.Errorf("\t: bad Dot product - expected %d, got %d\n",
+				tc.expDot, dot)
+		}
+	}
+}
+
+func TestNGramLength(t *testing.T) {
+	testCases := []struct {
+		name   string
+		s      string
+		ngLen  int
+		expLen float64
+	}{
+		{
+			name:   "",
+			s:      "abab",
+			ngLen:  2,
+			expLen: 2.236,
+		},
+		{
+			name:   "",
+			s:      "ababab",
+			ngLen:  2,
+			expLen: 3.606,
+		},
+	}
+
+	for i, tc := range testCases {
+		tcID := fmt.Sprintf("test %d: %s (s = %s):\n", i, tc.name, tc.s)
+		ngs, err := strdist.NGrams(tc.s, tc.ngLen)
+		if err != nil {
+			t.Log(tcID)
+			t.Errorf("\t: Couldn't create the ngram set: %s\n", err)
+			continue
+		}
+		l := ngs.Length()
+		const epsilon = 0.001
+		if !mathutil.AlmostEqual(l, tc.expLen, epsilon) {
+			t.Log(tcID)
+			t.Errorf("\t: length differs by more than %f"+
+				" - expected %.4f, got %.4f\n",
+				epsilon, tc.expLen, l)
 		}
 	}
 

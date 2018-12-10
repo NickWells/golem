@@ -3,11 +3,12 @@ package param
 import (
 	"errors"
 	"fmt"
-	"github.com/nickwells/golem/location"
 	"io"
 	"os"
 	"sort"
 	"strings"
+
+	"github.com/nickwells/golem/location"
 )
 
 // DfltTerminalParam is the default value of the parameter that will stop
@@ -28,9 +29,11 @@ const DfltProgName = "PROGRAM NAME UNKNOWN"
 type ErrMap map[string][]error
 
 // ParamSet represents a collection of parameters to be parsed together. A
-// program will typically only have one ParamSet but having his makes it
-// easier to retain control. You would create the ParamSet in main and then
-// you know precisely which parameters have been enabled before calling Parse
+// program will typically only have one ParamSet but having this makes it
+// easier to retain control. You would create the ParamSet in main using the
+// paramset.New func which will automatically set the standard help
+// member. This lets you know precisely which parameters have been enabled
+// before calling Parse
 type ParamSet struct {
 	parsed          bool
 	parseCalledFrom string
@@ -263,8 +266,8 @@ func cleanParamParts(p *ByName, paramParts []string) []string {
 func (ps *ParamSet) recordUnexpectedParam(paramName string, loc *location.L) {
 	msg := "this is not a parameter of this program."
 
-	bestSuggestion, proximity := ps.findClosestMatch(paramName)
-	if proximity < 5 && bestSuggestion != "" {
+	bestSuggestion := ps.findClosestMatch(paramName)
+	if bestSuggestion != "" {
 		msg += "\n\nDid you mean: " + bestSuggestion + " ?"
 	}
 

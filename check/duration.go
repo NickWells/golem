@@ -9,7 +9,7 @@ import (
 // parameter and returns an error or nil if the check passes
 type Duration func(d time.Duration) error
 
-// DurationGT  returns a function that will check that the value is
+// DurationGT returns a function that will check that the value is
 // greater than the limit
 func DurationGT(limit time.Duration) Duration {
 	return func(d time.Duration) error {
@@ -20,7 +20,19 @@ func DurationGT(limit time.Duration) Duration {
 	}
 }
 
-// DurationLT  returns a function that will check that the value is
+// DurationGE returns a function that will check that the value is
+// greater than or equal to the limit
+func DurationGE(limit time.Duration) Duration {
+	return func(d time.Duration) error {
+		if d >= limit {
+			return nil
+		}
+		return fmt.Errorf("the value (%s) must be greater than or equal to %s",
+			d, limit)
+	}
+}
+
+// DurationLT returns a function that will check that the value is
 // less than the limit
 func DurationLT(limit time.Duration) Duration {
 	return func(d time.Duration) error {
@@ -28,6 +40,18 @@ func DurationLT(limit time.Duration) Duration {
 			return nil
 		}
 		return fmt.Errorf("the value (%s) must be less than %s", d, limit)
+	}
+}
+
+// DurationLE returns a function that will check that the value is
+// less than or equal to the limit
+func DurationLE(limit time.Duration) Duration {
+	return func(d time.Duration) error {
+		if d <= limit {
+			return nil
+		}
+		return fmt.Errorf("the value (%s) must be less than or equal to %s",
+			d, limit)
 	}
 }
 

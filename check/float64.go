@@ -17,6 +17,18 @@ func Float64GT(limit float64) Float64 {
 	}
 }
 
+// Float64GE returns a function that will check that the value is greater
+// than or equal to the limit
+func Float64GE(limit float64) Float64 {
+	return func(f float64) error {
+		if f >= limit {
+			return nil
+		}
+		return fmt.Errorf(
+			"the value (%f) must be greater than or equal to %f", f, limit)
+	}
+}
+
 // Float64LT returns a function that will check that the value is less than
 // the limit
 func Float64LT(limit float64) Float64 {
@@ -25,6 +37,18 @@ func Float64LT(limit float64) Float64 {
 			return nil
 		}
 		return fmt.Errorf("the value (%f) must be less than %f", f, limit)
+	}
+}
+
+// Float64LE returns a function that will check that the value is less than
+// or equal to the limit
+func Float64LE(limit float64) Float64 {
+	return func(f float64) error {
+		if f <= limit {
+			return nil
+		}
+		return fmt.Errorf(
+			"the value (%f) must be less than or equal to %f", f, limit)
 	}
 }
 

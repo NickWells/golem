@@ -6,7 +6,7 @@ import "fmt"
 // int64 parameter and returns an error
 type Int64 func(i int64) error
 
-// Int64EQ  returns a function that will check that the value is
+// Int64EQ returns a function that will check that the value is
 // greater than the limit
 func Int64EQ(limit int64) Int64 {
 	return func(i int64) error {
@@ -17,7 +17,7 @@ func Int64EQ(limit int64) Int64 {
 	}
 }
 
-// Int64GT  returns a function that will check that the value is
+// Int64GT returns a function that will check that the value is
 // greater than the limit
 func Int64GT(limit int64) Int64 {
 	return func(i int64) error {
@@ -28,7 +28,19 @@ func Int64GT(limit int64) Int64 {
 	}
 }
 
-// Int64LT  returns a function that will check that the value is less
+// Int64GE returns a function that will check that the value is
+// greater than or equal to the limit
+func Int64GE(limit int64) Int64 {
+	return func(i int64) error {
+		if i >= limit {
+			return nil
+		}
+		return fmt.Errorf("the value (%d) must be greater than or equal to %d",
+			i, limit)
+	}
+}
+
+// Int64LT returns a function that will check that the value is less
 // than the limit
 func Int64LT(limit int64) Int64 {
 	return func(i int64) error {
@@ -39,7 +51,19 @@ func Int64LT(limit int64) Int64 {
 	}
 }
 
-// Int64Between  returns a function that will check that the value
+// Int64LE returns a function that will check that the value is less
+// than or equal to the limit
+func Int64LE(limit int64) Int64 {
+	return func(i int64) error {
+		if i <= limit {
+			return nil
+		}
+		return fmt.Errorf("the value (%d) must be less than or equal to %d",
+			i, limit)
+	}
+}
+
+// Int64Between returns a function that will check that the value
 // lies between the upper and lower limits (inclusive)
 func Int64Between(low, high int64) Int64 {
 	if low >= high {
@@ -63,7 +87,7 @@ func Int64Between(low, high int64) Int64 {
 	}
 }
 
-// Int64Divides  returns a function that will check that the value
+// Int64Divides returns a function that will check that the value
 // is a divisor of d
 func Int64Divides(d int64) Int64 {
 	return func(i int64) error {

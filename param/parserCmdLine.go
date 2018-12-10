@@ -3,43 +3,27 @@ package param
 import (
 	"errors"
 	"fmt"
+	"strings"
+
 	"github.com/nickwells/golem/location"
 	"github.com/nickwells/golem/strdist"
-	"strings"
 )
 
 // Remainder returns any arguments that come after the terminal parameter
 func (ps *ParamSet) Remainder() []string { return ps.remainingParams }
 
-// findClosestMatch finds the parameter with the name which is the shortest
-// distance from the passed value and returns it together with the distance
-func (ps *ParamSet) findClosestMatch(badParam string) (string, int) {
-	var minDist = -1
-	closestMatches := make([]string, 0)
-	var closestMatch string
-
+// findClosestMatch finds parameters with the name which is the shortest
+// distance from the passed value and returns a string describing them
+func (ps *ParamSet) findClosestMatch(badParam string) string {
+	paramNames := make([]string, 0, len(ps.nameToParam))
 	for p := range ps.nameToParam {
-		if minDist == -1 {
-			minDist = strdist.Levenshtein(badParam, p)
-			closestMatches = append(closestMatches, p)
-		} else {
-			dist := strdist.Levenshtein(badParam, p)
-			if dist < minDist {
-				minDist = dist
-				closestMatches[0] = p
-				closestMatches = closestMatches[:1]
-			} else if dist == minDist {
-				closestMatches = append(closestMatches, p)
-			}
-		}
+		paramNames = append(paramNames, p)
 	}
 
-	sep := ""
-	for _, match := range closestMatches {
-		closestMatch += sep + match
-		sep = " or "
-	}
-	return closestMatch, minDist
+	matches := strdist.CaseBlindCosineFinder.FindNStrLike(
+		3, badParam, paramNames...)
+
+	return strings.Join(matches, " or ")
 }
 
 func (ps *ParamSet) reportMissingParams(missingCount int) {

@@ -1,11 +1,37 @@
 package strdist
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // NGramSet represents a set of n-grams. Each n-gram has an associated weight
 // which is the number of occurences in the original string from which it is
 // derived
 type NGramSet map[string]int
+
+// Dot returns the dot product of the two n-gram sets
+func Dot(n1, n2 NGramSet) int64 {
+	var d int64
+	for k, v := range n1 {
+		d += int64(v * n2[k])
+	}
+	return d
+}
+
+// lengthSquared returns the square of the Length of the n-gram set
+func (ngs NGramSet) lengthSquared() float64 {
+	var l float64
+	for _, v := range ngs {
+		l += float64(v * v)
+	}
+	return l
+}
+
+// Length returns the Length (sometimes called the Magnitude) of the n-gram set
+func (ngs NGramSet) Length() float64 {
+	return math.Sqrt(ngs.lengthSquared())
+}
 
 // NGrams transforms the string s into a map of n-grams (substrings of s each
 // of length n). The key is the n-gram and the value is the number of
@@ -188,43 +214,6 @@ func NGramsEqual(ngs1, ngs2 NGramSet) bool {
 	}
 
 	return true
-}
-
-// JaccardIndex returns the Jaccard index of the two n-gram sets
-func JaccardIndex(ngs1, ngs2 NGramSet) float64 {
-	if len(ngs1) == 0 && len(ngs2) == 0 {
-		return 1.0
-	}
-
-	uLen := NGramLenUnion(ngs1, ngs2)
-	iLen := NGramLenIntersection(ngs1, ngs2)
-
-	return float64(iLen) / float64(uLen)
-}
-
-// Jaccard returns the Jaccard distance of the two n-gram sets (1 -
-// JaccardIndex)
-func Jaccard(ngs1, ngs2 NGramSet) float64 {
-	return 1.0 - JaccardIndex(ngs1, ngs2)
-}
-
-// WeightedJaccardIndex returns the Weighted Jaccard index of the two n-gram
-// sets. It uses the NGramWeightedLen... functions to calculate the length
-func WeightedJaccardIndex(ngs1, ngs2 NGramSet) float64 {
-	if len(ngs1) == 0 && len(ngs2) == 0 {
-		return 1.0
-	}
-
-	uLen := NGramWeightedLenUnion(ngs1, ngs2)
-	iLen := NGramWeightedLenIntersection(ngs1, ngs2)
-
-	return float64(iLen) / float64(uLen)
-}
-
-// WeightedJaccard returns the Weighted Jaccard distance of the two n-gram
-// sets (1 - WeightedJaccardIndex)
-func WeightedJaccard(ngs1, ngs2 NGramSet) float64 {
-	return 1.0 - WeightedJaccardIndex(ngs1, ngs2)
 }
 
 // OverlapCoefficient constructs the overlap coefficient (sometimes known as the
