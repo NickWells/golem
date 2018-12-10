@@ -62,9 +62,9 @@ parameters will be available for further processing without being parsed.
 The default behaviour of the package is to add some standard
 parameters. These allow the user to see a help message which is automatically
 generated from the parameters added above. This can be in varying levels of
-detail. If you just pass the -help param you will get the standard help
-message but the -help-full parameter shows some hidden parameters and the
--help-short parameter gives a summary of the parameters.
+detail. If you just pass the `-help` param you will get the standard help
+message but the `-help-full` parameter shows some hidden parameters and the
+`-help-short` parameter gives a summary of the parameters.
 
 Additionally the standard parameters offer the chance to examine where
 parameters have been set and to control the parsing behaviour.
