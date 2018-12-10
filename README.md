@@ -58,7 +58,7 @@ Additionally you can have positional parameters as well as named parameters.
 You can specify a terminal parameter (by default `--`) and the remaining
 parameters will be available for further processing without being parsed.
 
-##Standard parameters
+## Standard parameters
 The default behaviour of the package is to add some standard
 parameters. These allow the user to see a help message which is automatically
 generated from the parameters added above. This can be in varying levels of
@@ -69,7 +69,7 @@ message but the -help-full parameter shows some hidden parameters and the
 Additionally the standard parameters offer the chance to examine where
 parameters have been set and to control the parsing behaviour.
 
-##The help message
+## The help message
 The standard help message generated if the user passes the -help parameter
 will show the program description and the non-hidden parameters. For each
 parameter it will show:
@@ -84,7 +84,7 @@ any environment variable prefixes have been given (use the `SetEnvPrefix` and
 `AddEnvPrefix` functions on the ParamSet) these will be reported at the end
 of the help message.
 
-##Parameter Groups
+## Parameter Groups
 Parameters can be grouped together so that they are reported together rather
 than in alphabetical order. This is to allow logically related parameters to
 be reported together. The standard parameters offer a way of showing the help
