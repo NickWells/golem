@@ -2,6 +2,8 @@
 This is a collection of useful go packages. The packages are all documented
 and mostly have comprehensive tests.
 
+DEPRECATED - this is superseded by the individual packages
+
 ## packages
 * param is a replacement for the go flag package that adds the ability to check the supplied values and much more
 * check collects some standard checks that can be applied to params
